@@ -1,6 +1,6 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/react";
 
 const Index = (props) => {
     console.log(props);
@@ -26,9 +26,9 @@ const Index = (props) => {
                 </div>
             )}
             <h1>Product List</h1>
-            <InertiaLink href="/products/create" className="btn btn-primary">
+            <Link href="/products/create" className="btn btn-primary">
                 Create Product
-            </InertiaLink>
+            </Link>
             <table className="table mt-4">
                 <thead>
                     <tr>
@@ -43,12 +43,12 @@ const Index = (props) => {
                             <td>{product.name}</td>
                             <td>{product.price}</td>
                             <td>
-                                <InertiaLink
+                                <Link
                                     href={`/products/${product.id}/edit`}
                                     className="btn btn-info mr-2"
                                 >
                                     Edit
-                                </InertiaLink>
+                                </Link>
 
                                 {/* Form Action Using CSRF Token */}
                                 {/* <form
