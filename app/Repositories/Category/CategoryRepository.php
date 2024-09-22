@@ -1,62 +1,62 @@
 <?php
 
-namespace App\Repositories\Product;
+namespace App\Repositories\Category;
 
-use App\Models\Product;
-use App\Repositories\Product\Interfaces\ProductRepositoryInterface;
+use App\Models\Category;
+use App\Repositories\Category\Interfaces\CategoryRepositoryInterface;
 
-class ProductRepository implements ProductRepositoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
     /**
-     * Get all Product records.
+     * Get all Category records.
      */
     public function getAll()
     {
-        return Product::with(['category'])->get();
+        return Category::all();
     }
 
     /**
-     * Create a new Product record.
+     * Create a new Category record.
      * 
      * @param array $data
      */
     public function create(array $data)
     {
-        return Product::create($data);
+        return Category::create($data);
     }
 
     /**
-     * Find a record Product by ID.
+     * Find a record Category by ID.
      * 
      * @param int $id
      */
     public function findById(int $id)
     {
-        return Product::findOrFail($id);
+        return Category::findOrFail($id);
     }
 
     /**
-     * Update a record Product by ID.
+     * Update a record Category by ID.
      * 
      * @param int $id
      * @param array $data
      */
     public function updateById(int $id, array $data)
     {
-        $model = Product::findOrFail($id);
+        $model = Category::findOrFail($id);
         $model->update($data);
 
         return $model;
     }
 
     /**
-     * Delete a record Product by ID.
+     * Delete a record Category by ID.
      * 
      * @param int $id
      */
     public function deleteById(int $id)
     {
-        $model = Product::findOrFail($id);
+        $model = Category::findOrFail($id);
         return $model->delete();
     }
 }

@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-react";
 
-const Create = () => {
+const Create = (props) => {
+    const { categories } = props;
     const { data, setData, post, errors } = useForm({
         name: "",
         price: "",
         description: "",
+        category_id: "",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(data);
         post("/products");
     };
 
@@ -57,6 +60,28 @@ const Create = () => {
                     />
                     {errors.description && <div>{errors.description}</div>}
                 </label>
+
+                <div className="form-control w-ful max-w-xs">
+                    <label htmlFor="Category" className="label">
+                        <span className="label-text">Category</span>
+                    </label>
+                    <select
+                        name="category_id"
+                        value={data.category_id}
+                        onChange={(e) => setData("category_id", e.target.value)}
+                        className="select select-bordered"
+                    >
+                        <option value="">Select Category</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.category_id && (
+                        <div className="text-red-500">{errors.category_id}</div>
+                    )}
+                </div>
 
                 <button type="submit" className="btn btn-primary mt-8">
                     Save

@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Models\Product;
+use App\Services\Category\CategoryService;
 use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-    protected $ProductService;
+    protected $ProductService, $CategoryService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, CategoryService $categoryService)
     {
         $this->ProductService = $productService;
+        $this->CategoryService = $categoryService;
     }
 
     /**
@@ -32,7 +34,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Products/Create');
+        $categories = $this->CategoryService->getAll();
+
+        return Inertia::render('Products/Create', ['categories' => $categories]);
     }
 
     /**
@@ -60,7 +64,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return Inertia::render('Products/Edit', ['product' => $product]);
+        $categories = $this->CategoryService->getAll();
+
+        return Inertia::render('Products/Edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**

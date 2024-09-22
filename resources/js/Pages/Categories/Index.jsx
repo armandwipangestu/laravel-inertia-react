@@ -4,13 +4,13 @@ import { Link } from "@inertiajs/react";
 
 const Index = (props) => {
     console.log(props);
-    const { products, flash } = props;
+    const { categories, flash } = props;
 
     const handleDetele = (id) => {
-        if (confirm("Are you sure you want to delete this product?")) {
-            Inertia.delete(`/products/${id}`, {
+        if (confirm("Are you sure you want to delete this category?")) {
+            Inertia.delete(`/categories/${id}`, {
                 onSuccess: () => {
-                    alert("Product deleted successfully");
+                    alert("Category deleted successfully");
                 },
             });
         }
@@ -25,32 +25,24 @@ const Index = (props) => {
                     </div>
                 </div>
             )}
-            <h1>Product List</h1>
-            <Link href="/products/create" className="btn btn-primary">
-                Create Product
+            <h1>Category List</h1>
+            <Link href="/categories/create" className="btn btn-primary">
+                Create Category
             </Link>
             <table className="table mt-4">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((product) => (
-                        <tr key={product.id}>
-                            <td>{product.name}</td>
-                            <td>
-                                {product.category
-                                    ? product.category.name
-                                    : "No Category"}
-                            </td>
-                            <td>{product.price}</td>
+                    {categories.map((category) => (
+                        <tr key={category.id}>
+                            <td>{category.name}</td>
                             <td>
                                 <Link
-                                    href={`/products/${product.id}/edit`}
+                                    href={`/categories/${category.id}/edit`}
                                     className="btn btn-info mr-2"
                                 >
                                     Edit
@@ -58,7 +50,7 @@ const Index = (props) => {
 
                                 {/* Form Action Using CSRF Token */}
                                 {/* <form
-                                    action={`/products/${product.id}`}
+                                    action={`/categories/${product.id}`}
                                     method="POST"
                                     style={{ display: "inline-block" }}
                                 >
@@ -86,7 +78,7 @@ const Index = (props) => {
 
                                 {/* Action using Inertia Delete Method */}
                                 <button
-                                    onClick={() => handleDetele(product.id)}
+                                    onClick={() => handleDetele(category.id)}
                                     className="btn btn-error"
                                 >
                                     Delete
